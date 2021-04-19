@@ -8,6 +8,7 @@ namespace ArthurMarichal.Musics.Database
     {
         public void Configure(EntityTypeBuilder<Music> builder)
         {
+            //Je créé ma table et ses colonnes.
             builder.ToTable("Music");
             builder.HasKey("Title");
             builder.Property(Music => Music.Title)

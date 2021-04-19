@@ -6,6 +6,7 @@ namespace ArthurMarichal.Musics.Database.PostgreSQL
 {
     public static class DatabaseExtension
     {
+        //Création de la migration.
         public static void AddMusicDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MusicContext>(opt =>
