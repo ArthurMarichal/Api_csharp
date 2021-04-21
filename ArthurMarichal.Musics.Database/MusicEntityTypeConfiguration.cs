@@ -10,14 +10,14 @@ namespace ArthurMarichal.Musics.Database
         {
             //Je créé ma table et ses colonnes.
             builder.ToTable("Music");
-            builder.HasKey("Title");
-            builder.Property(Music => Music.Title)
+            builder.HasKey(music => music.Id);
+            builder.Property(music => music.Title)
                 .IsRequired()
                 .HasMaxLength(256);
-            builder.Property(Music => Music.Artist)
+            builder.Property(music => music.Artist)
                 .IsRequired()
                 .HasMaxLength(256);
-            builder.Property(Music => Music.Album)
+            builder.Property(music => music.Album)
                 .IsRequired()
                 .HasMaxLength(256);
         }
