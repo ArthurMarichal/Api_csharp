@@ -11,8 +11,6 @@ namespace ArthurMarichal.Musics.Api.Controllers
     [Route("api/musics")]
     public class MusicController : ControllerBase
     {
-        //"_logger" permet de fournir des fonctionnalités par defaut pour les enregistreurs qui traitent les évements déclenchés par le moteur de génération.
-        // Il va nous servir à voir difféntes choses tel que le bon fonctionnement.
         private readonly ILogger<MusicController> _logger;
         private readonly MusicContext _musicContext;
 
@@ -23,6 +21,10 @@ namespace ArthurMarichal.Musics.Api.Controllers
         }
 
         // Ceci va chercher  tous  ce qu'il y a dans ma base de données.
+        /// <summary>
+        /// Trouve toutes les musique.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -31,11 +33,16 @@ namespace ArthurMarichal.Musics.Api.Controllers
         }
 
         //Je vais chercher un objet spécifique grâce à son ID.
+        /// <summary>
+        /// Trouve une musique spécifique via son ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
         public IActionResult Read([FromRoute] int id)
         {
-            _logger.LogInformation("Action {ActionName} called with parameter id = {Id}.", nameof(Read), id);
+            _logger.LogInformation("Action {ActionName} called with id = {Id}.", nameof(Read), id);
             var music = _musicContext.Musics.Find(id);
             if (music == null)
             {
@@ -46,6 +53,11 @@ namespace ArthurMarichal.Musics.Api.Controllers
         }
 
         //Création  d'un objet.
+        /// <summary>
+        /// Ajout d'une musique à la base de donnée.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create([FromBody] CreateOrUpdateMusicRequest request)
         {
@@ -61,11 +73,16 @@ namespace ArthurMarichal.Musics.Api.Controllers
         }
 
         //Suppréssion d'un objet.
+        /// <summary>
+        /// Suppréssion d'une musique via son ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            _logger.LogInformation("Action {ActionName} called with parameter id = {Id}.", nameof(Delete), id);
+            _logger.LogInformation("Action {ActionName} called with id = {Id}.", nameof(Delete), id);
             var music = _musicContext.Musics.Find(id);
             if (music == null)
             {
@@ -78,11 +95,17 @@ namespace ArthurMarichal.Musics.Api.Controllers
         }
     
         //Modification d'un objet.
+        /// <summary>
+        /// Modification d'une musique précise avec son ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update([FromRoute]int id, [FromBody]CreateOrUpdateMusicRequest request)
         {
-            _logger.LogInformation("Action {ActionName} called with parameter id = {Id}, with body {RequestBody}", nameof(Update), id , request);
+            _logger.LogInformation("Action {ActionName} called with id = {Id}, with body {RequestBody}", nameof(Update), id , request);
             var music = _musicContext.Musics.Find(id);
             if (music == null)
             {

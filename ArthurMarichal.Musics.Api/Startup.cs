@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using ArthurMarichal.Musics.Database.PostgreSQL;
 using Microsoft.AspNetCore.Builder;
@@ -31,7 +34,19 @@ namespace ArthurMarichal.Musics.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArthurMarichal.Musics.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Ma première API en C#",
+                    Version = "v1",
+                    Description = "Découverte et apprentissage du C# dans la conception d'une API CRUD",
+                    Contact = new OpenApiContact{
+                        Name = "Mon LinkedIn",
+                        Url =new  Uri("https://www.linkedin.com/in/arthur-marichal-99a7101b3/")
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
             services.AddMusicDatabase(Configuration);
         }
