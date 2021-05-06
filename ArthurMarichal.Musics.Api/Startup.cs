@@ -44,9 +44,8 @@ namespace ArthurMarichal.Musics.Api
                         Url =new  Uri("https://www.linkedin.com/in/arthur-marichal-99a7101b3/")
                     }
                 });
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "ArthurMarichal.Musics.Api.xml");
+                c.IncludeXmlComments(filePath);
             });
             services.AddMusicDatabase(Configuration);
         }
@@ -57,8 +56,15 @@ namespace ArthurMarichal.Musics.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArthurMarichal.Musics.Api v1"));
+                app.UseSwagger(c =>
+                {
+                    c.SerializeAsV2 = true;
+                });
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArthurMarichal.Musics.Api v1");
+                    c.RoutePrefix = string.Empty;});
+                
             }
 
             app.UseHttpsRedirection();

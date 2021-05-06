@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using ArthurMarichal.Musics.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ArthurMarichal.Musics.Api.Controllers
@@ -38,6 +39,7 @@ namespace ArthurMarichal.Musics.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /// 
         [HttpGet]
         [Route("{id}")]
         public IActionResult Read([FromRoute] int id)
