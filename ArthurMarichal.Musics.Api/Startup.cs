@@ -15,6 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.Security.Policy;
+using System.IO;
 
 namespace ArthurMarichal.Musics.Api
 {
@@ -56,15 +59,8 @@ namespace ArthurMarichal.Musics.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger(c =>
-                {
-                    c.SerializeAsV2 = true;
-                });
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArthurMarichal.Musics.Api v1");
-                    c.RoutePrefix = string.Empty;});
-                
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArthurMarichal.Musics.Api v1"));
             }
 
             app.UseHttpsRedirection();
