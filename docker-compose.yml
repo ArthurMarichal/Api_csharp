@@ -11,6 +11,8 @@ services:
     volumes:
       - ../postgres-data:/var/lib/postgresql/data
   music.api:
+    environment:
+      - ConnectionStrings__Music=User ID=postgres;Password=test42;Host=db;Port=5432;Database=music;
     build: .
     ports:
       - 8080:80
